@@ -1,6 +1,6 @@
 <?php
 
-namespace Hero;
+namespace elzobrito;
 
 use \PDO;
 use \PDOStatement;
@@ -8,7 +8,7 @@ use \Exception;
 
 /**
  * Class Connection
- * @package Hero
+ * @package elzobrito
  */
 class Connection
 {
@@ -37,7 +37,7 @@ class Connection
     protected function connect()
     {
         if (!$this->pdo) {
-            $this->pdo = new PDO($this->dsn(), $this->options['user'], $this->options['password']);
+            $this->pdo = new PDO($this->dsn(), $this->options['user'], $this->options['password'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES "UTF8"'));
         }
         return $this->pdo;
     }
@@ -47,7 +47,7 @@ class Connection
      */
     protected function dsn()
     {
-        return "mysql:host={$this->options['host']};port={$this->options['port']};dbname={$this->options['database']}";
+        return "{$this->options['driver']}:host={$this->options['host']};port={$this->options['port']};dbname={$this->options['database']}";
     }
 
     /**
@@ -134,5 +134,4 @@ class Connection
     {
         return $this->options;
     }
-
 }

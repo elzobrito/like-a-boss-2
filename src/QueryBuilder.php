@@ -1,10 +1,10 @@
 <?php
 
-namespace Hero;
+namespace elzobrito;
 
 /**
  * Class QueryBuilder
- * @package Hero
+ * @package elzobrito
  * @method QueryBuilder table (string $table)
  * @method QueryBuilder join (string $join)
  * @method QueryBuilder fields (array $fields)
@@ -97,8 +97,10 @@ class QueryBuilder extends Connection
         $fields = implode(', ', $_fields);
 
         $join = isset($this->clausules['join']) ? $this->clausules['join'] : '';
+        $preSelect = isset($this->clausules['pre']) ? $this->clausules['pre'] : '';
 
         $command = [];
+        $command[] = $preSelect;
         $command[] = 'SELECT';
         $command[] = $fields;
         $command[] = 'FROM';
